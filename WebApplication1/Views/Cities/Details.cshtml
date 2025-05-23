@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.City
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.PhotoPath" alt="@Model.Name" class="img-fluid" />
+        <img src="@Model.CoatOfArmsPath" alt="Герб @Model.Name" class="img-fluid mt-3" style="max-height: 150px;" />
+    </div>
+    <div class="col-md-6">
+        <p><strong>Регион:</strong> @Model.Region</p>
+        <p><strong>Население:</strong> @Model.Population</p>
+        <p><strong>История:</strong> @Model.History</p>
+        <p><strong>Описание:</strong> @Model.Description</p>
+    </div>
+</div>
+
+<h3>Достопримечательности</h3>
+<div class="row">
+    @foreach (var attraction in Model.Attractions)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="@attraction.PhotoPath" class="card-img-top" alt="@attraction.Name" style="height: 150px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@attraction.Name</h5>
+                    <p class="card-text">@attraction.Description</p>
+                    <a asp-controller="Attractions" asp-action="Details" asp-route-id="@attraction.Id" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад</a>

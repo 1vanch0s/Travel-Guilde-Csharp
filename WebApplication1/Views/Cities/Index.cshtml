@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication1.Models.City>
+
+@{
+    ViewData["Title"] = "Список городов";
+}
+
+<h1>Туристический путеводитель</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="searchString">Поиск по названию:</label>
+        <input name="searchString" class="form-control" />
+        <input type="submit" value="Поиск" class="btn btn-primary" />
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var city in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="@city.PhotoPath" class="card-img-top" alt="@city.Name" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@city.Name (@city.Region)</h5>
+                    <p class="card-text">Население: @city.Population</p>
+                    <p class="card-text">@city.Description</p>
+                    <a asp-action="Details" asp-route-id="@city.Id" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
